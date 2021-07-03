@@ -4,6 +4,8 @@ applicable.py is a very basic package with a single function: `applicable()`. It
 
 It is recommended to use this package with Python 3.8 or higher, because best functionality is acheived with the walrus operator (`:=`), but it is not required. The package is Python 2.6+ compatible.
 
+## Signature and Arguments
+
 The signature of `applicable()` is:
 
     applicable(callable: Callable,
@@ -20,6 +22,8 @@ The signature of `applicable()` is:
 - `ret_result`: Whether to return `callable(*args, **kwargs)` upon no error. `True` by default. If false, `applicable()` will return `True` upon no error.
 - `ret_exc`: Whether to return an `applicable._FalseException` instance using the exception raised upon error. `_FalseException` is a subclass of Exception, with a couple of differences: It has a boolean value of `False`, a _FalseException instance will always equal another _FalseException instance, and has the `inst` and `cls` attribute, which are the exception instance and class, respectively, of the offending error so that you can still trace the exception that occured. This argument is `True` by default. If false, `False` will be returned upon error.
 - `args` and `kwargs`: The arguments that are passed to `callable()`.
+
+## Use
 
 This function will usually be used in an `if` statement like the following:
 ```
