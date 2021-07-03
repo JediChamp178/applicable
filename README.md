@@ -39,7 +39,7 @@ This function will usually be used in an `if` statement like the following:
         exc = applicable(SomeCallable, 'arg!', a_kwarg='kwarg!')
         # Do something with the exception; use val.cls for the exception class
 ```
-\* **Note:** In this example, for both versions, the following would be more accurate (i.e, it wouldn't catch empty sequences, 0 (zero), and other objects that evaluate to boolean `False`) and, for the 2.6+ version, faster and more convenient:
+\* **Note:** In this example, for both versions, the following would be more accurate (i.e, it wouldn't catch empty sequences, `0` (zero), and other objects that evaluate to boolean `False`) and, for the 2.6+ version, faster and more convenient:
 ```
 from applicable import applicable
 
