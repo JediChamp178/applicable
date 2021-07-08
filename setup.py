@@ -6,7 +6,7 @@ README = (HERE / 'README.md').read_text()
 
 setup(
     name='applicable',
-    version='1.0',
+    version='1.0.1',
     description='Test callables without raising exceptions',
     long_description=README,
     long_description_content_type='text/markdown',
@@ -16,16 +16,12 @@ setup(
     classifiers=[
         'License :: Free for non-commercial use',
         'Development Status :: 5 - Production/Stable',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
     ],
-    packages=find_packages(),
-    inculde_package_data=True
+    packages=find_packages()
 )
