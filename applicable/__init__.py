@@ -2,7 +2,7 @@
 without raising an exception, with the applicable() function."""
 
 __author__ = 'Finn Mason'
-__version__ = '1.0'
+__version__ = '1.0.1'
 __all__ = [
     '_FalseException',
     'applicable'
@@ -58,3 +58,7 @@ def applicable(callable: Callable, *args: Any, **kwargs: Any) -> Any:
         if ret_result:
             return ret
         return True
+
+if __name__ == '__main__':
+    a = applicable(int, '42')
+    b = applicable(int, 'yee')
