@@ -18,7 +18,7 @@ The signature of `applicable()` is:
 
 - `callable`: The callable to be tested
 - `ret_result`: Whether to return `callable(*args, **kwargs)` upon no error. `True` by default. If false, `applicable()` will return `True` upon no error.
-- `ret_exc`: Whether to return an `applicable._FalseException` instance using the exception raised upon error. `_FalseException` is a subclass of Exception, with a couple of differences: It has a boolean value of `False`, a _FalseException instance will always equal another _FalseException instance, and has the `inst` and `cls` attribute, which are the exception instance and class, respectively, of the offending error so that you can still trace the exception that occured. This argument is `True` by default. If false, `False` will be returned upon error.
+- `ret_exc`: Type or value to return upon error. Defaults to `_FalseException`. With the exception of `_FalseException` (which is returned as `_FalseException(exception_instance)`), the default value for the type is returned, e.g., `int()` (which is `0`), `bool()` (`False`), `None` if `ret_exc` is a type. If `ret_exc` is a value, the value is returned. *Changed in version 1.1.0: `ret_exc` was previously a boolean value specifying whether to return a `_FalseException` or not.*
 - `args` and `kwargs`: The arguments that are passed to `callable()`.
 
 This function will usually be used in an `if` statement like the following:
@@ -56,6 +56,11 @@ False
 >>> a = applicable(complex, 4, imag=3, ret_result=False)
 >>> a
 True
->>> a = applicable(int, 'whoops', ret_exc=False)
+>>> a = applicable(int, 'whoops', ret_exc=bool)
+>>> a
 False
+>>> applicable(int, 'whoops', ret_exc=None)
+None
+>>> applicable(int, 'whoops', ret_exc=4)
+4
 ```
