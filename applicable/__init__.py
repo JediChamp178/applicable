@@ -2,7 +2,7 @@
 without raising an exception, with the applicable() function."""
 
 __author__ = 'Finn Mason'
-__version__ = '1.0.1'
+__version__ = '1.1.1'
 __all__ = [
     '_FalseException',
     'applicable'
@@ -35,8 +35,11 @@ def applicable(callable: Callable, *args: Any, **kwargs: Any) -> Any:
     
     There are two special keyword arguments: ret_exc and ret_result.
     
-    ret_exc: Whether to return the exception raised upon error (in the form
-    of a _FalseException). Defaults to True.
+    ret_exc: Type or value to return upon error. Defaults to _FalseException. With 
+    the exception of _FalseException (which is returned as _FalseException
+    (exception_instance)), the default value for the type is returned, e.g.,
+    int() (which is 0), bool() (False), None, if ret_exc is a type. If ret_exc
+    is a value, the value is returned.
     ret_result: Whether to return the result of the operation upon no error.
     Defaults to True.
     
@@ -44,16 +47,21 @@ def applicable(callable: Callable, *args: Any, **kwargs: Any) -> Any:
     """
 
     ret_result = kwargs.get('ret_result', True)
-    ret_exc = kwargs.get('ret_exc', True)
+    ret_exc = kwargs.get('ret_exc', _FalseException)
     if 'ret_exc' in kwargs: del kwargs['ret_exc']
     if 'ret_result' in kwargs: del kwargs['ret_result']
     
     try:
         ret = callable(*args, **kwargs)
-    except Exception as e:
-        if ret_exc:
-            return _FalseException(e)
-        return False
+    except Exception as exc:
+        if ret_exc is _FalseException:
+            return _FalseException(exc)
+        elif ret_exc == None:
+            return
+        elif isinstance(ret_exc, type):
+            return ret_exc()
+        else:
+            return ret_exc
     else:
         if ret_result:
             return ret
