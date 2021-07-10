@@ -6,11 +6,11 @@ README = (HERE / 'README.md').read_text()
 
 setup(
     name='applicable',
-    version='1.0.1',
+    version='1.1.1',
     description='Test callables without raising exceptions',
     long_description=README,
     long_description_content_type='text/markdown',
-    url='https://github.com/JediChamp178/applicable/',
+    url='https://github.com/JediChamp178/applicable',
     author='Finn Mason',
     license='GNU General Public License',
     classifiers=[
